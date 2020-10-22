@@ -1,0 +1,62 @@
+1. Setup Python Virtual environment:
+    Syntax: python -m venv <virt_env_name>
+    >python -m venv virt_env
+2. Activate virtual environment
+    >.\virt_env\Scripts\activate
+3. Install Django
+    >pip install django==2.1.5
+4. Start Django project
+    >django-admin startproject <project_name> .
+5. Using the debugger
+    >Go to Debugger 
+    >Click the gear/settings icon
+        >This will create a configuration file for the project
+    >Select "Python: Django" from the drop down
+    >Click play button
+        >This will start running the server
+    >Use Debugger features: Breakpoints, Local variables, Watch pane etc
+6. Running the server
+    >python manage.py runserver
+7. Start Django App
+    >python manage.py startapp <app_name>
+8. Sync the model with database
+    >python manage.py makemigrations
+    >python manage.py migrate
+9. Create super user
+    >python manage.py createsuperuser
+    username: gayan
+    pwd     : an********ra
+10. Added the app name in settings.py - Installed Apps
+11. Added html templates into weather/templates/weather
+    i. Add all the html templates into weather/templates/weather
+    ii. Add all the static files (ie: css, js, images) into static/weather
+    iii. Add the static files path in the settings.py -> STATICFILES_DIRS
+        STATICFILES_DIRS = [
+            os.path.join(BASE_DIR, 'static')
+        ]
+    iv. Do necessary changes to the css files if needed.
+        Ex: Move the main css (style.css) to the static dir
+    v. Edit the path to every static file(ie: css, js, images) references in the html file
+        Ex: {% load static%} <!-- At the top -->
+            {% static 'weather/img/image1.jpg'%}
+            {% static 'weather/'%}
+12. Added the url path in main urls.py file 
+    path('', include('weather.urls')),
+13. Created new "urls.py" file in weather app dir and included below
+    from django.urls import path
+    from .views import weather_view
+    urlpatterns = [
+        path('',weather_view , name='weather_home'),
+    ]
+14. In views.py in weather, defined weather_view method
+    def weather_view(request):
+        return render(request, 'weather/weather.html')
+
+    With this the weather template is now being rendered through the django weather app.
+15. Next use API to get weather data. This should be done in views -> weather_view.
+16. Pass obtained data to the html template through views
+17. Use passed data in the html template
+18. Get the data from forms
+    i. Create a model to get city name
+        > In models.py -> Create "City" model/class -> Inherit from models.Model
+        > Add name field
