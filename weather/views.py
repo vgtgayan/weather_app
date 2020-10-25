@@ -47,3 +47,6 @@ def weather_view(request):
         'form' : form
     }
     return render(request, 'weather/weather.html', context)
+
+def contact_view(request):
+    return render(request, 'weather/contact.html', {})
