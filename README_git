@@ -1,4 +1,5 @@
 Git Repo: https://github.com/vgtgayan/weather_app
+<remote_repo_name> : weather_app_django
 
 - Add file to staged area
     >git add <files>
@@ -7,6 +8,11 @@ Git Repo: https://github.com/vgtgayan/weather_app
 - Add and commit in one command
     >git commit -a -m "commit message"
 - Push commited changes to remote Repo
-    >git push <repo_name>
+    >git remote add <remote_repo_name> <url>
+    >git push <remote_repo_name>
+    if doesn't work try below,
+    >git push --set-upstream weather_app_django master
+    You may want to first integrate the remote changes
+    >git pull weather_app_django master
 - Check current status
     >git status
