@@ -1,0 +1,49 @@
+Deploy the app in Heroku...
+1. Download and install "heroku toolbelt"
+2. Restart terminals
+    - Try >heroku --version to confirm installation
+3. pip install below packages
+    >django-heroku
+    >gunicorn
+    >python-decouple
+    >dj-database-url
+4. Create file -> Procfile and include below
+    web: gunicorn weather_app.wsgi
+5. Create "requirements.txt"
+    >pip freeze > requirements.txt
+6. Tweaking settings for heroku
+    - In settings.py
+        - import the installed packages
+            import django_heroku
+            import dj_database_url
+            from decouple import config
+        - Add whitenoise in MIDDLEWARE list
+            'whitenoise.middleware.WhiteNoiseMiddleware',
+        - Add STATICFILESTORAGE 
+            STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+        - Add below at the bottom
+            django_heroku.settings(locals())
+    - Then commit the changes
+        >git add .
+        >git commit -am "Tweaked app for heroku"
+        >git push
+7. Push the app to heroku
+    >heroku login
+        This will pop up new browser window and login to heroku using that and come back
+    >heroku keys:add
+        This will add heroku security keys
+    >heroku create
+        This will create a new app in heroku
+        Check the created app by routing to the created url
+    >heroku rename <new-name>
+        This will rename the site url as we specify.
+        The name should be unique
+        Try the new url.
+    >git push heroku master
+        This will push the code to heroku
+        This will take a while.
+        You may get errors.
+        Try solve them by as prompted or by googling.
+        If no any errors, now the website is live !!!....
+    >Migrate changes in heroku database.
+        >heroku run python ./manage.py migrate
